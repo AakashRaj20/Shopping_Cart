@@ -37,7 +37,7 @@ export async function getStaticProps() {
       language: "en",
     },
     headers: {
-      "X-RapidAPI-Key": "a8aa97fe9emshe8587b9239550f4p185925jsnfae7ba7ab064",
+      "X-RapidAPI-Key": "03ea7d33d0msh2ddcb3b26528cb1p1ea52ajsnf815c18ed655",
       "X-RapidAPI-Host": "real-time-product-search.p.rapidapi.com",
     },
   };
