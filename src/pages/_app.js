@@ -1,5 +1,12 @@
-import '@/styles/globals.css'
+import React from 'react';
+import { ProductContextProvider } from '@/context/StateContext';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }) {
+  return (
+    <ProductContextProvider>
+      <Component {...pageProps} />
+    </ProductContextProvider>
+  );
 }
+
+export default MyApp;
