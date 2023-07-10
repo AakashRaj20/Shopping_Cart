@@ -5,9 +5,6 @@ const cart = () => {
   
   return (
     <Grid container rowSpacing={15} sx={{ overflowX: "hidden" }}>
-      <Grid item xs={12}>
-        <Navbar />
-      </Grid>
       <Grid
         item
         xs={12}

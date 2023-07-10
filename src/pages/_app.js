@@ -1,10 +1,12 @@
-import React from 'react';
-import { ProductContextProvider } from '@/context/StateContext';
+import React from "react";
+import { ProductContextProvider } from "@/context/StateContext";
+import Navbar from "@/components/Navbar";
 
 function MyApp({ Component, pageProps }) {
   return (
     <ProductContextProvider>
-      <Component {...pageProps} />
+      <Navbar />
+        <Component {...pageProps} />
     </ProductContextProvider>
   );
 }

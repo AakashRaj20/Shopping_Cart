@@ -25,7 +25,12 @@ const ProductCard = () => {
       {mycart === undefined ? (
         <Loader />
       ) : (
-        <Grid container columnSpacing={2} rowSpacing={5}>
+        <Grid
+          container
+          columnSpacing={2}
+          rowSpacing={5}
+          sx={{ padding: { xs: "65px 0", sm: '65px 0 0 60px' } }}
+        >
           {apiData?.data?.map((each, id) => {
             return (
               <Grid

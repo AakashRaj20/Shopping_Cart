@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
@@ -18,13 +18,69 @@ import { ShoppingCart } from "@mui/icons-material";
 import { useCartStore } from "../store/cartStore";
 import { CssBaseline } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const drawerWidth = 240;
 
-const Navbar = (props) => {
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
 
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
+
+const Navbar = (props) => {
   const totalqty = useCartStore((state) => state.totalqty);
   const [cartitems, setCartItems] = useState();
+  const [search, setSearch] = useState();
+ 
+  const Router = useRouter();
+
+   const handleFormSubmit = async (e) => {
+     e.preventDefault();
+     Router.push({
+       // whatever your baseUrl
+       pathname: `/search/${search}`,
+       query: { keyword: search},
+     });
+   };
+
+   const handleChange = (e) => {
+        setSearch(e.target.value);
+   }
 
   useEffect(() => {
     setCartItems(totalqty);
@@ -66,9 +122,7 @@ const Navbar = (props) => {
                 Cart
               </Typography>
               <Badge badgeContent={cartitems} color="primary">
-                <Link href="/cart">
-                  <ShoppingCart />
-                </Link>
+                <ShoppingCart />
               </Badge>
             </ListItemButton>
           </Link>
@@ -108,6 +162,23 @@ const Navbar = (props) => {
               Product List
             </Typography>
           </Link>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <form
+              onSubmit={handleFormSubmit}
+            >
+              <StyledInputBase
+                value={search}
+                name="search"
+                type="text"
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                onChange={handleChange}
+              />
+            </form>
+          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box
             sx={{
@@ -115,17 +186,19 @@ const Navbar = (props) => {
               margin: { md: "0 50px 0 0", sm: "0 25px 0 0" },
             }}
           >
+            <Link href="/cart">
             <IconButton
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
             >
               <Badge badgeContent={cartitems} color="success">
-                <Link href="/cart">
+                
                   <ShoppingCart />
-                </Link>
+                
               </Badge>
             </IconButton>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>

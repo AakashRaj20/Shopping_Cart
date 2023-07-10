@@ -7,6 +7,7 @@ export const useCartStore = create(
       total: 0,
       totalqty: 0,
       cartContent: [],
+      navState: "",
       addTocart: (params) => {
         set((state) => ({
           totalqty: state.totalqty + 1,
@@ -40,6 +41,7 @@ export const useCartStore = create(
           totalqty: state.totalqty - 1,
           total: state.total - parseFloat(price),
         })),
+      setNavState: ({ searchParam }) => set({ navState: searchParam }),
     }),
     { name: "cart" }
   )
