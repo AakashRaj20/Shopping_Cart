@@ -39,12 +39,6 @@ export async function getServerSideProps({ query }) {
 
   const response = await axios.request(options);
 
-   if (response.status === 429) {
-     const secondsToWait = Number(response.headers.get("retry-after"));
-     await new Promise((resolve) => setTimeout(resolve, secondsToWait * 1000));
-     return getServerSideProps({ query });
-   }
-
   return {
     props: {
       productList: response.data,

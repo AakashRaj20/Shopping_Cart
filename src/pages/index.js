@@ -40,7 +40,6 @@ export async function getStaticProps() {
    };
 
    const response = await axios.request(options);
-   console.log(response.data);
 
    return {
      props: {
