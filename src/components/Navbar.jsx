@@ -66,21 +66,21 @@ const Navbar = (props) => {
   const totalqty = useCartStore((state) => state.totalqty);
   const [cartitems, setCartItems] = useState();
   const [search, setSearch] = useState();
- 
+
   const Router = useRouter();
 
-   const handleFormSubmit = async (e) => {
-     e.preventDefault();
-     Router.push({
-       // whatever your baseUrl
-       pathname: `/search/${search}`,
-       query: { keyword: search},
-     });
-   };
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    Router.push({
+      // whatever your baseUrl
+      pathname: `/search/${search}`,
+      query: { keyword: search },
+    });
+  };
 
-   const handleChange = (e) => {
-        setSearch(e.target.value);
-   }
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
 
   useEffect(() => {
     setCartItems(totalqty);
@@ -166,9 +166,7 @@ const Navbar = (props) => {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <form
-              onSubmit={handleFormSubmit}
-            >
+            <form onSubmit={handleFormSubmit}>
               <StyledInputBase
                 value={search}
                 name="search"
@@ -187,17 +185,15 @@ const Navbar = (props) => {
             }}
           >
             <Link href="/cart">
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={cartitems} color="success">
-                
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge badgeContent={cartitems} color="success">
                   <ShoppingCart />
-                
-              </Badge>
-            </IconButton>
+                </Badge>
+              </IconButton>
             </Link>
           </Box>
         </Toolbar>
