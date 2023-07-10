@@ -29,7 +29,7 @@ const ProductCard = () => {
           container
           columnSpacing={2}
           rowSpacing={5}
-          sx={{ padding: { xs: "65px 0", sm: '65px 0 0 60px' } }}
+          sx={{ padding: { xs: "65px 0", lg: '65px 0 0 55px' } }}
         >
           {apiData?.data?.map((each, id) => {
             return (
